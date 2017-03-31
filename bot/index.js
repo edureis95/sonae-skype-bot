@@ -1,8 +1,9 @@
 var builder = require('botbuilder');
+var cognitiveServices = require('botbuilder-cognitiveservices');
 
 var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId: process.env.MICROSOFT_APP_ID_,
+    appPassword: process.env.MICROSOFT_APP_PASSWORD_
 });
 
 var bot = new builder.UniversalBot(connector);
@@ -14,10 +15,21 @@ function listen() {
     };
 }
 
-bot.dialog('/', function (session) {
-    session.send("Hello World");
+
+//____________________________________________________________
+
+var recognizer = new cognitiveServices.QnAMakerRecognizer({
+    knowledgeBaseId: process.env.SONAE_FAQS_KBID,
+    subscriptionKey: process.env.SONAE_FAQS_SUBKEY
 });
 
+bot.dialog('/', new cognitiveServices.QnAMakerDialog({
+    recognizers: [recognizer],
+    defaultMessage: "I didn't what you say. Repeat please.",
+    qnaThreshold: 0.3
+}));
+
+//____________________________________________________________
 
 // Enable Conversation Data persistence
 //bot.set('persistConversationData', true);
