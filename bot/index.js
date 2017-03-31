@@ -2,8 +2,8 @@ var builder = require('botbuilder');
 var cognitiveServices = require('botbuilder-cognitiveservices');
 
 var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID_,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD_
+    appId: process.env.MICROSOFT_APP_ID,
+    appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 
 var bot = new builder.UniversalBot(connector);
@@ -25,7 +25,7 @@ var recognizer = new cognitiveServices.QnAMakerRecognizer({
 
 bot.dialog('/', new cognitiveServices.QnAMakerDialog({
     recognizers: [recognizer],
-    defaultMessage: "I didn't what you say. Repeat please.",
+    defaultMessage: "I didn't unsertand what you say. Repeat please.",
     qnaThreshold: 0.3
 }));
 
