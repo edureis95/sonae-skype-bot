@@ -4,7 +4,8 @@
   "description": "Bot for Sonae",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha ./bot/tests/test.js -- -R spec"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,8 @@
     "botbuilder": "^3.7.0",
     "botbuilder-cognitiveservices": "^1.0.1",
     "dotenv-extended": "^1.0.4",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
   }
 }
