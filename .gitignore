@@ -2,4 +2,8 @@ node_modules
 jspm_packages
 
 # Optional npm cache directory
-.npm
+.npm´
+
+# coverage of tests
+coverage
+
