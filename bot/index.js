@@ -15,14 +15,19 @@ function listen() {
 }
 
 bot.dialog('/', function (session) {
-    session.send("Hello World");
+    if(session.message.text == "direcções" || session.message.text == "direccoes")
+        return session.beginDialog('global_purpose:directions');
+    else
+        session.send("Hello World");
 });
+
 
 
 // Enable Conversation Data persistence
 //bot.set('persistConversationData', true);
 
 // Sub-Dialogs
+bot.library(require('./dialogs/global_purpose').createLibrary());
 /*
 bot.library(require('./dialogs/...').createLibrary());
 bot.library(require('./dialogs/...').createLibrary());    
