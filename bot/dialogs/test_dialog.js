@@ -1,3 +1,3 @@
-bot.dialog('/', function (session) {
-    session.send("Hello World");
+bot.dialog('/', (session) => {
+  session.send('Hello World');
 });
