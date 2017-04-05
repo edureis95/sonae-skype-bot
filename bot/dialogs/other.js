@@ -21,7 +21,7 @@ lib.dialog('greet', new builder.SimpleDialog(function (session, results) {
 // Help dialog
 lib.dialog('help', function (session) {
     
-    return session.send(HelpMessage);
+    return session.endDialog(HelpMessage);
 
 });
 

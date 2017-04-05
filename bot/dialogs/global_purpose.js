@@ -66,9 +66,11 @@ function parseAnchorTag(input) {
 function handleSuccessResponse(session, caption) {
     if (caption) {
         session.send('I think it\'s ' + caption);
+        session.endDialog();
     }
     else {
         session.send('Couldn\'t find a caption for this one');
+        session.endDialog();
     }
 
 }
