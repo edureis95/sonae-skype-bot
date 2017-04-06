@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/LGP-FEUP/sonae-bot#readme",
   "dependencies": {
+    "bing": "^0.1.0",
     "botbuilder": "^3.7.0",
     "dotenv-extended": "^1.0.4",
     "express": "^4.15.2"
