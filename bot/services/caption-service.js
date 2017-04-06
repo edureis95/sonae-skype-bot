@@ -5,7 +5,7 @@
 
 var request = require('request').defaults({ encoding: null });
 
-var VISION_URL = 'https://api.projectoxford.ai/vision/v1.0/analyze/?visualFeatures=Description&form=BCSIMG&subscription-key=' + process.env.MICROSOFT_VISION_API_KEY;
+var VISION_URL = 'https://api.projectoxford.ai/vision/v1.0/analyze/?visualFeatures=Description&form=BCSIMG&subscription-key=' + 'a7ea43c5490e4276982b90dee386dbef';
 
 /** 
  *  Gets the caption of the image from an image stream

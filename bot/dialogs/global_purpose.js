@@ -1,5 +1,5 @@
 var builder = require('botbuilder');
-var captionService = require('../../caption-service');
+var captionService = require('../services/caption-service');
 var needle = require('needle');
 
 var lib = new builder.Library('global_purpose');
@@ -7,20 +7,26 @@ var lib = new builder.Library('global_purpose');
 
 
 lib.dialog('analyze_image', function (session) {
-    
      var stream = getImageStreamFromMessage(session.message);
         captionService
             .getCaptionFromStream(stream)
             .then(function (caption) { handleSuccessResponse(session, caption); })
             .catch(function (error) { handleErrorResponse(session, error); });
+});
 
-
+lib.dialog('food_menu', function(session) {
+    return session.endDialog('[Insert Menu here]');
 });
 
 //=========================================================
 // Utilities
 //=========================================================
 
+/**
+ * Gets the image stream from the message
+ * @param {*} message
+ * @returns {stream} Image stream
+ */
 function getImageStreamFromMessage(message) {
     var headers = {};
     var attachment = message.attachments[0];
@@ -63,6 +69,12 @@ function parseAnchorTag(input) {
 //=========================================================
 // Response Handling
 //=========================================================
+
+/**
+ * Handles a success response from the Vision API
+ * @param {*} session 
+ * @param {*} caption 
+ */
 function handleSuccessResponse(session, caption) {
     if (caption) {
         session.send('I think it\'s ' + caption);
@@ -75,6 +87,11 @@ function handleSuccessResponse(session, caption) {
 
 }
 
+/**
+ * Handles an error response from the Vision API
+ * @param {*} session 
+ * @param {*} error 
+ */
 function handleErrorResponse(session, error) {
     session.send('Oops! Something went wrong. Try again later.');
     console.error(error);

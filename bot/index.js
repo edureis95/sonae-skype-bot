@@ -50,7 +50,11 @@ session.send('3');
 session.send('4');
         return session.beginDialog('global_purpose:analyze_image');
     
-    }else{
+    }
+    else if(session.message.text.toUpperCase() == 'EMENTA') {
+        return session.beginDialog('global_purpose:food_menu');
+    }
+    else{
 session.send('5');
         return session.send("Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.");
     }
@@ -66,6 +70,7 @@ session.send('5');
 
 bot.library(require('./dialogs/global_purpose').createLibrary());
 bot.library(require('./dialogs/other').createLibrary());
+bot.library(require('./dialogs/productivity').createLibrary());
 //bot.library(require('./dialogs/...').createLibrary());    
 
 

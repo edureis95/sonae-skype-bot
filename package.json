@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Bot for Sonae",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "scripts": {
+    "start": "node app.js",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha ./bot/tests/test.js -- -R spec"
   },
   "repository": {
     "type": "git",
