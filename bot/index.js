@@ -22,7 +22,5 @@ bot.dialog('/', function(session) {
 bot.library(require('./dialogs/faqs_dialog').createLibrary());
 
 module.exports = {
-    listen: listen/*,
-    beginDialog: beginDialog,
-    sendMessage: sendMessage*/
+    listen: listen
 };
