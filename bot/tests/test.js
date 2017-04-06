@@ -8,12 +8,12 @@ var assert = require('assert');
 var request = require('request-promise');
 
 /**
- * Verifies if Sonae FAQs are accessed
+ * SONAE FAQs Tests
  */
 var querySonaeFAQS = function(query, callback) {
   var options = {
     method: 'POST',
-    uri: 'https://westus.api.cognitive.microsoft.com/qnamaker/v1.0//knowledgebases/' + process.env.SONAE_FAQS_KBID + '/generateAnswer',
+    uri: 'https://westus.api.cognitive.microsoft.com/qnamaker/v1.0//knowledgebases/'+ process.env.SONAE_FAQS_KBID + '/generateAnswer',
     headers: { 
       'Ocp-Apim-Subscription-Key': process.env.SONAE_FAQS_SUBKEY 
     },
@@ -53,3 +53,4 @@ describe('FAQs', function() {
        });
     });
 });
+

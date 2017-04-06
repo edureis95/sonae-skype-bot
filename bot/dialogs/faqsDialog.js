@@ -1,5 +1,5 @@
 
-/*
+/**
  * This file contains all the dialogs 
  * related to FAQs
  */
