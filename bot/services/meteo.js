@@ -110,9 +110,9 @@ function getWeatherByCityOnDay(city, country, day, next) {
                     temperature: undefined,
                     clouds: undefined,
                 },
-                country : bodyParsed.city.name,
+                city : bodyParsed.city.name,
             }
-
+            
             // parses only the relevant information. it runs through a list and adds to the correct day, according to morning, afternoon and evening.
             // FIXME: the descriptions are in english
             for (let i = 0; i < bodyParsed.list.length; i++) {
@@ -122,28 +122,37 @@ function getWeatherByCityOnDay(city, country, day, next) {
                     // morning
                     if (time.hour === 9) {
                         respo.morning.description = bodyParsed.list[i].weather[0].description;
+                        respo.morning.icon = bodyParsed.list[i].weather[0].icon;
                         respo.morning.short_description = bodyParsed.list[i].weather[0].main;
                         respo.morning.humidity = bodyParsed.list[i].main.humidity + '%';
                         respo.morning.wind_velocity = bodyParsed.list[i].wind.speed + ' metros/segundo';
                         respo.morning.temperature = toCelsius(bodyParsed.list[i].main.temp);
+                        respo.morning.temperature_min = toCelsius(bodyParsed.list[i].main.temp_min);
+                        respo.morning.temperature_max = toCelsius(bodyParsed.list[i].main.temp_max);
                         respo.morning.clouds = bodyParsed.list[i].clouds.all + '%';
                     }
                     // afternoon
                     else if (time.hour === 15) {
                         respo.afternoon.description = bodyParsed.list[i].weather[0].description;
+                        respo.afternoon.icon = bodyParsed.list[i].weather[0].icon;
                         respo.afternoon.short_description = bodyParsed.list[i].weather[0].main;
                         respo.afternoon.humidity = bodyParsed.list[i].main.humidity + '%';
                         respo.afternoon.wind_velocity = bodyParsed.list[i].wind.speed + ' metros/segundo';
                         respo.afternoon.temperature = toCelsius(bodyParsed.list[i].main.temp);
+                        respo.afternoon.temperature_min = toCelsius(bodyParsed.list[i].main.temp_min);
+                        respo.afternoon.temperature_max = toCelsius(bodyParsed.list[i].main.temp_max);
                         respo.afternoon.clouds = bodyParsed.list[i].clouds.all + '%';
                     }
                     // evening
                     else if (time.hour === 21) {
                         respo.evening.description = bodyParsed.list[i].weather[0].description;
+                        respo.evening.icon = bodyParsed.list[i].weather[0].icon;
                         respo.evening.short_description = bodyParsed.list[i].weather[0].main;
                         respo.evening.humidity = bodyParsed.list[i].main.humidity + '%';
                         respo.evening.wind_velocity = bodyParsed.list[i].wind.speed + ' metros/segundo';
                         respo.evening.temperature = toCelsius(bodyParsed.list[i].main.temp);
+                        respo.evening.temperature_min = toCelsius(bodyParsed.list[i].main.temp_min);
+                        respo.evening.temperature_max = toCelsius(bodyParsed.list[i].main.temp_max);
                         respo.evening.clouds = bodyParsed.list[i].clouds.all + '%';
                     }
                     // don't waste unnecessary time

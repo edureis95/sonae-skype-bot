@@ -15,7 +15,8 @@ function listen() {
 }
 
 bot.dialog('/', function (session) {
-    session.send("Hello World");
+     if(session.message.text == "meteorologia" || session.message.text == "tempo")
+        return session.beginDialog('global_purpose:meteo');;
 });
 
 
@@ -23,10 +24,10 @@ bot.dialog('/', function (session) {
 //bot.set('persistConversationData', true);
 
 // Sub-Dialogs
-/*
-bot.library(require('./dialogs/...').createLibrary());
-bot.library(require('./dialogs/...').createLibrary());    
-*/
+
+bot.library(require('./dialogs/global_purpose').createLibrary());
+
+
 
 /*
 function beginDialog(address, dialogId, dialogArgs) {
