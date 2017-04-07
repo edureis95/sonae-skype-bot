@@ -1,11 +1,7 @@
 var builder = require('botbuilder');
 var fs = require('fs');
 var request = require('request');
-
-const vision = require('@google-cloud/vision') ({
-    keyFilename: 'googleAPIKey/key.json',
-    projectId: 'persuasive-yeti-163120'
-});
+var google_vision = require('../services/google_vision.js');
 
 var lib = new builder.Library('global_purpose');
 
@@ -20,7 +16,7 @@ lib.dialog('analyze_image', function (session) {
 
     //Save temp image file
     download(attachment.contentUrl, fileName, function() {
-        checkImage(fileName, function(caption) {
+        google_vision.checkImage(fileName, function(caption) {
             session.endDialog(caption);
             //Delete temp image file
             fs.unlink(fileName);
@@ -51,27 +47,7 @@ var download = function(uri, filename, callback){
   });
 };
 
-/**
- * Use vision API to get caption from image file
- * @param {*} fileName 
- * @param {*} callback 
- */
-function checkImage(fileName, callback) {
-    vision.detectSimilar(fileName)
-    .then((data) => {
-        const results = data[1].responses[0].webDetection;
-
-        if (results.webEntities.length > 0) {
-            callback(results.webEntities[0].description);
-        }
-        else
-            callback('Couldn\'t find anything');
-    });
-}
-
 // Export createLibrary() function
 module.exports.createLibrary = function () {
     return lib.clone();
 };
-
-module.exports = { checkImage };
