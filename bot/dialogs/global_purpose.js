@@ -13,20 +13,17 @@ lib.dialog('analyze_image', function (session) {
     
     var attachment = session.message.attachments[0];
 
-    download(attachment.contentUrl, 'uploads/temp.' + attachment.contentType.substring(6), function() {
-        // The path to the local image file, e.g. "/path/to/image.png"
-        const fileName = 'uploads/temp.' + attachment.contentType.substring(6);
+    var date = new Date();
+    var t = date.getTime();
 
-        // Detect similar images on the web to a local file
-        vision.detectSimilar(fileName)
-        .then((data) => {
-            const results = data[1].responses[0].webDetection;
+    const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);
 
-            if (results.webEntities.length > 0) {
-                session.endDialog(results.webEntities[0].description);
-            }
-
-            fs.unlink('uploads/temp.' + attachment.contentType.substring(6));
+    //Save temp image file
+    download(attachment.contentUrl, fileName, function() {
+        checkImage(fileName, function(caption) {
+            session.endDialog(caption);
+            //Delete temp image file
+            fs.unlink(fileName);
         });
     });
 });
@@ -39,6 +36,12 @@ lib.dialog('food_menu', function(session) {
 // Utilities
 //=========================================================
 
+/**
+ * Download file from url
+ * @param {*} uri 
+ * @param {*} filename 
+ * @param {*} callback 
+ */
 var download = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
     console.log('content-type:', res.headers['content-type']);
@@ -48,7 +51,27 @@ var download = function(uri, filename, callback){
   });
 };
 
+/**
+ * Use vision API to get caption from image file
+ * @param {*} fileName 
+ * @param {*} callback 
+ */
+function checkImage(fileName, callback) {
+    vision.detectSimilar(fileName)
+    .then((data) => {
+        const results = data[1].responses[0].webDetection;
+
+        if (results.webEntities.length > 0) {
+            callback(results.webEntities[0].description);
+        }
+        else
+            callback('Couldn\'t find anything');
+    });
+}
+
 // Export createLibrary() function
 module.exports.createLibrary = function () {
     return lib.clone();
 };
+
+module.exports = { checkImage };

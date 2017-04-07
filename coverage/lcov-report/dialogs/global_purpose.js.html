@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for dialogs\global_purpose.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">dialogs/</a> global_purpose.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>15/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">12.5% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>15/30</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">var builder = require('botbuilder');
+var fs = require('fs');
+var request = require('request');
+&nbsp;
+const vision = require('@google-cloud/vision') ({
+    keyFilename: 'googleAPIKey/key.json',
+    projectId: 'persuasive-yeti-163120'
+});
+&nbsp;
+var lib = new builder.Library('global_purpose');
+&nbsp;
+lib.dialog('analyze_image', <span class="fstat-no" title="function not covered" >function (session) {</span>
+    
+<span class="cstat-no" title="statement not covered" >    var attachment = session.message.attachments[0];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var date = new Date();</span>
+<span class="cstat-no" title="statement not covered" >    var t = date.getTime();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);</span>
+&nbsp;
+    //Save temp image file
+<span class="cstat-no" title="statement not covered" >    download(attachment.contentUrl, fileName, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        checkImage(fileName, <span class="fstat-no" title="function not covered" >function(caption) {</span></span>
+<span class="cstat-no" title="statement not covered" >            session.endDialog(caption);</span>
+            //Delete temp image file
+<span class="cstat-no" title="statement not covered" >            fs.unlink(fileName);</span>
+        });
+    });
+});
+&nbsp;
+lib.dialog('food_menu', <span class="fstat-no" title="function not covered" >function(session) {</span>
+<span class="cstat-no" title="statement not covered" >    return session.endDialog('[Insert Menu here]');</span>
+});
+&nbsp;
+//=========================================================
+// Utilities
+//=========================================================
+&nbsp;
+/**
+ * Download file from url
+ * @param {*} uri 
+ * @param {*} filename 
+ * @param {*} callback 
+ */
+var download = <span class="fstat-no" title="function not covered" >function(uri, filename, callback){</span>
+<span class="cstat-no" title="statement not covered" >  request.head(uri, <span class="fstat-no" title="function not covered" >function(err, res, body){</span></span>
+<span class="cstat-no" title="statement not covered" >    console.log('content-type:', res.headers['content-type']);</span>
+<span class="cstat-no" title="statement not covered" >    console.log('content-length:', res.headers['content-length']);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);</span>
+  });
+};
+&nbsp;
+/**
+ * Use vision API to get caption from image file
+ * @param {*} fileName 
+ * @param {*} callback 
+ */
+function checkImage(fileName, callback) {
+    vision.detectSimilar(fileName)
+    .then((data) =&gt; {
+        const results = data[1].responses[0].webDetection;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (results.webEntities.length &gt; 0) {
+            callback(results.webEntities[0].description);
+        }
+        else
+<span class="cstat-no" title="statement not covered" >            callback('Couldn\'t find anything');</span>
+    });
+}
+&nbsp;
+// Export createLibrary() function
+module.exports.createLibrary = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return lib.clone();</span>
+};
+&nbsp;
+module.exports = { checkImage };</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Apr 07 2017 20:25:43 GMT+0100 (GMT Summer Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
