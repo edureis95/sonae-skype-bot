@@ -32,22 +32,18 @@ bot.dialog('/', function(session) {
     var userName = session.userData[UserNameKey];
     
     if (!userName) {
-session.send('1');
         return session.beginDialog('other:greet');
     }
     
-    else if(session.message.text == 'Olá'){
-session.send('2');
+    else if(session.message.text.toUpperCase() == 'OLÁ'){
         return session.beginDialog('other:greet');
     }
 
-   else if(session.message.text == 'Ajuda'){
-session.send('3');
+   else if(session.message.text.toUpperCase() == 'AJUDA'){
         return session.beginDialog('other:help');
     }
     //Analyse Image Dialog
     else if (hasImageAttachment(session)) {
-session.send('4');
         return session.beginDialog('global_purpose:analyze_image');
     
     }
@@ -55,7 +51,6 @@ session.send('4');
         return session.beginDialog('global_purpose:food_menu');
     }
     else{
-session.send('5');
         return session.send("Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.");
     }
 	
