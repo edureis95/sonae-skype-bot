@@ -1,7 +1,4 @@
 /*
- * In order to retrive from the Bing Maps API, it's necessary to get a key (through the Bing Maps Portal) and then set it as an environmental variable in the sonae-bot dir.
- * To do so, just open a command prompt in the dir and type: set BING_MAPS_API_KEY=<Your API key>.
- * 
  * In order for the API to return in pt-PT, it's necessary to modify the 'bing' NPM module. At the end of the URL concatenation functions in the module, concatenate '&culture=pt-PT'.
  * This will allow the the API to return in pt-PT.
  * 
@@ -26,31 +23,35 @@ lib.dialog('directions', [
         if(results.response) {
             session.dialogData.directions.end_point = results.response;
         }
-        builder.Prompts.text(session, "Qual é o modo de transporte a utilizar na viagem?");
+        builder.Prompts.choice(session, "Qual é o modo de transporte a utilizar na viagem?", ["Caminhar", "Carro"], {listStyle: builder.ListStyle.button});
     },
     function(session, results) {
-        //TODO: Limit the distance when transportation mode is walking.
-
-        if(results.response == 'caminhar')
+        if(results.response.entity == 'Caminhar')
         {
             bing.maps.getWalkingRoute(session.dialogData.directions.start_point, session.dialogData.directions.end_point, function(err, resp) {
                 if(err) {
                     return session.endDialogWithResult("Oops, não consigo encontrar o meu mapa. Importas-te de tentar outra vez?");
                 }
                 else {
-                    var route = resp.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
-                    var directions = '';
-
-                    for(var i = 0, length = route.length; i < length; i++) {
-                        var direction = (route[i].instruction.text);
-                        session.send(direction);                        
+                    console.log(resp.resourceSets[0].resources[0].travelDistance);
+                    if (resp.resourceSets[0].resources[0].travelDistance >= 15) {
+                        session.send("Não consigo encontrar direcções a caminhar para essa viagem... Talvez estejas a planear caminhar a mais? Tenta por carro!");
+                        session.endDialogWithResult(results);
                     }
-                    
-                    session.endDialogWithResult(results);
+                    else {
+                        var route = resp.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
+                        var directions = '';
+                        
+                        for(var i = 0, length = route.length; i < length; i++) {
+                            var direction = (route[i].instruction.text);
+                            session.send(direction);               
+                        }
+                        session.endDialogWithResult(results);
+                    }
                 }
-            });        
+            }); 
         }
-        if(results.response == 'carro')
+        if(results.response.entity == 'Carro')
         {
             bing.maps.getDrivingRoute(session.dialogData.directions.start_point, session.dialogData.directions.end_point, function(err, resp) {
                 if(err) {
@@ -70,8 +71,9 @@ lib.dialog('directions', [
             });        
         }
     }
-    ]);
-
+    ]).triggerAction({
+        matches: 'direccoes'
+    });
 
 module.exports.createLibrary = function () {
     return lib.clone();

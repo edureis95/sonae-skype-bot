@@ -7,21 +7,18 @@ var connector = new builder.ChatConnector({
 
 var bot = new builder.UniversalBot(connector);
 
+// LUIS recognizer
+
+var model = process.env.LUIS_MODEL_URL;
+var recognizer = new builder.LuisRecognizer(model);
+bot.recognizer(recognizer);
+
 var connectorListener = connector.listen();
 function listen() {
     return function (req, res) {       
         connectorListener(req, res);
     };
 }
-
-bot.dialog('/', function (session) {
-    if(session.message.text == "direcções" || session.message.text == "direccoes")
-        return session.beginDialog('global_purpose:directions');
-    else
-        session.send("Hello World");
-});
-
-
 
 // Enable Conversation Data persistence
 //bot.set('persistConversationData', true);
