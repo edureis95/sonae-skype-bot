@@ -7,7 +7,8 @@ const request = require('request-promise');
  * Retrieves file from SharePoint
  * @param {string} filename must be between '' ex: var filename = "'ficheiro.xls'"
  */
-/* TODO CHANGE THIS TO SONAE BOT WEBSITE*/
+
+//TODO CHANGE THIS TO SONAE BOT WEBSITE
 function getFileFromSharePoint(filename, callback) {
 
     const partialEndpoint = "https://sonaesystems.sharepoint.com/sites/EQUIPALPTNORTH/_api/Files("

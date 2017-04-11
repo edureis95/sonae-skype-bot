@@ -11,6 +11,7 @@ lib.dialog('attachment', [
             if (url === null)
                 return session.endDialog("Error retrieving file's URL.");
 
+            /* TODO alterar isto */
             let contentType = 'application/excel';
 
             var msg = new builder.Message(session)
