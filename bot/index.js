@@ -14,14 +14,13 @@ function listen() {
   };
 }
 
-bot.dialog('/', function(session) {
-    return session.beginDialog('faqs:sonae-faqs'); // FIXME: used directly for testing purposes. May change as necessary.
-});
+bot.dialog('/', session => session.beginDialog('faqs:sonae-faqs'), // FIXME: used directly for testing purposes. May change as necessary.
+);
 
 // import faqs dialogs
 bot.library(require('./dialogs/faqsDialog').createLibrary());
 
 module.exports = {
-    listen: listen
+  listen,
 };
 

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "istanbul cover node_modules/mocha/bin/_mocha ./bot/tests/test.js -- -R spec"
+    "test": "istanbul cover node_modules/mocha/bin/_mocha ./bot/tests/test.js -- -R spec",
+    "lint": "eslint '**/*.js' --fix"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,10 @@
     "botbuilder-cognitiveservices": "^1.0.1",
     "dotenv-extended": "^1.0.4",
     "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "express": "^4.15.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
