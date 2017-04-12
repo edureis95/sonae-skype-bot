@@ -33,8 +33,12 @@ lib.dialog('directions', [
                     return session.endDialogWithResult("Oops, não consigo encontrar o meu mapa. Importas-te de tentar outra vez?");
                 }
                 else {
-                    console.log(resp.resourceSets[0].resources[0].travelDistance);
-                    if (resp.resourceSets[0].resources[0].travelDistance >= 15) {
+                    if (resp.resourceSets == undefined) {
+                        session.send("Não consigo encontrar direcções para essa viagem... Tens a certeza que esses locais existem? Tenta outra vez!");
+                        session.endDialogWithResult(results);
+                    }
+                    else {
+                        if (resp.resourceSets[0].resources[0].travelDistance >= 15) {
                         session.send("Não consigo encontrar direcções a caminhar para essa viagem... Talvez estejas a planear caminhar a mais? Tenta por carro!");
                         session.endDialogWithResult(results);
                     }
@@ -49,8 +53,9 @@ lib.dialog('directions', [
                         session.endDialogWithResult(results);
                     }
                 }
-            }); 
-        }
+            }
+        }); 
+    }
         if(results.response.entity == 'Carro')
         {
             bing.maps.getDrivingRoute(session.dialogData.directions.start_point, session.dialogData.directions.end_point, function(err, resp) {
@@ -58,6 +63,11 @@ lib.dialog('directions', [
                     return session.endDialogWithResult("Oops, não consigo encontrar o meu mapa. Importas-te de tentar outra vez?");
                 }
                 else {
+                    if (resp.resourceSets == undefined) {
+                        session.send("Não consigo encontrar direcções para essa viagem... Tens a certeza que esses locais existem? Tenta outra vez!");
+                        session.endDialogWithResult(results);
+                    }
+                    else {
                     var route = resp.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
                     var directions = '';
 
@@ -67,13 +77,12 @@ lib.dialog('directions', [
                     }
                     
                     session.endDialogWithResult(results);
+                    }
                 }
             });        
         }
     }
-    ]).triggerAction({
-        matches: 'direccoes'
-    });
+    ]);
 
 module.exports.createLibrary = function () {
     return lib.clone();
