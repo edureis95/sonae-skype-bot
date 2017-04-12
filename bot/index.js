@@ -1,15 +1,14 @@
 var builder = require('botbuilder');
 
 var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId: process.env.MICROSOFT_APP_ID_,
+    appPassword: process.env.MICROSOFT_APP_PASSWORD_
 });
 
 var bot = new builder.UniversalBot(connector);
 
 // LUIS recognizer
-
-var model = process.env.LUIS_MODEL_URL;
+var model = `https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/${process.env.LUIS_MODEL_APPID}?subscription-key=${process.env.LUIS_MODEL_SUBKEY}&timezoneOffset=0.0&verbose=true&q=`;
 var recognizer = new builder.LuisRecognizer(model);
 bot.recognizer(recognizer);
 
@@ -20,29 +19,13 @@ function listen() {
     };
 }
 
-// Enable Conversation Data persistence
-//bot.set('persistConversationData', true);
+bot.dialog('/', (session) => {
+  session.send('Hello World');
+});
 
 // Sub-Dialogs
-bot.library(require('./dialogs/global_purpose').createLibrary());
-/*
-bot.library(require('./dialogs/...').createLibrary());
-bot.library(require('./dialogs/...').createLibrary());    
-*/
-
-/*
-function beginDialog(address, dialogId, dialogArgs) {
-    bot.beginDialog(address, dialogId, dialogArgs);
-}
-
-function sendMessage(message) {
-    bot.send(message);
-}*/
-
-
+bot.library(require('./dialogs/globalPurpose').createLibrary());
 
 module.exports = {
-    listen: listen/*,
-    beginDialog: beginDialog,
-    sendMessage: sendMessage*/
+    listen: listen,
 };
