@@ -19,7 +19,7 @@ bot.dialog('/', [
       builder.Prompts.choice(
               session,
               'O que pretendes fazer?',
-              ['Obter informações'],
+              ['Obter suporte'],
               {
                   maxRetries: 3,
                   retryPrompt: 'Not a valid option',
@@ -43,8 +43,8 @@ bot.dialog('/', [
     // continue on proper dialog
     var selection = result.response.entity;
     switch (selection) {
-        case 'Obter informações':
-            return session.beginDialog('global_purpose');
+        case 'Obter suporte':
+            return session.beginDialog('productivity');
     }
   } 
 ]);
@@ -55,8 +55,8 @@ bot.dialog('/', [
 
 // Sub-Dialogs
 bot.library(require('./dialogs/attachment_example').createLibrary());
-bot.dialog('foodMenu', require('./dialogs/foodMenu.js'));
-bot.dialog('global_purpose', require('./dialogs/global_purpose.js'));
+bot.dialog('firstStepsManual', require('./dialogs/firstStepsManual.js'));
+bot.dialog('productivity', require('./dialogs/productivity.js'));
 
 /*
 bot.library(require('./dialogs/...').createLibrary());

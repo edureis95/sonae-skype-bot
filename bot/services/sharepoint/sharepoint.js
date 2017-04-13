@@ -50,7 +50,7 @@ function getFileUrlFromSharePoint(filename, callback) {
         json: true
     }
     ).then(function (response) {
-        console.log(response.body.d.Url);
+        //console.log(response.body.d.Url);
         callback(response.body.d.Url);
     }).catch(function (err) {
         console.log('Error retrieving file from sharepoint. Check the filename');
