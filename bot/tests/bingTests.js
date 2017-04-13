@@ -15,7 +15,7 @@ const request = require('request-promise');
 const findRoute = function (source, destination, callback) {
   const options = {
     method: 'GET',
-    uri: 'http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json&wp.0='+ source +'&wp.1='+ destination + '&avoid=minimizeTolls&key=AqNgdqQRbHbTI1C4i8R1drdqiKJ5u9bDgeJr1HxvdghjFewRCPln1YUzORPEYdf-',
+    uri: `http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json&wp.0=${source}&wp.1=${destination}&avoid=minimizeTolls&key=AqNgdqQRbHbTI1C4i8R1drdqiKJ5u9bDgeJr1HxvdghjFewRCPln1YUzORPEYdf-`,
   };
 
   request(options)
@@ -35,9 +35,12 @@ describe('BING API', function () {
   this.timeout(15000);
   it('can calculate routes', (done) => {
     findRoute('porto', 'penafiel', (response) => {
-        const JSON_response = JSON.parse(response);
-        assert.equal(JSON_response.resourceSets[0].resources[0].routeLegs[0].actualEnd.coordinates[0], 41.21012);
-        done();
+      const jsonResponse = JSON.parse(response);
+      assert.equal(
+        jsonResponse.resourceSets[0].resources[0].routeLegs[0].actualEnd.coordinates[0],
+        41.21012,
+      );
+      done();
     });
   });
 });
