@@ -14,10 +14,40 @@ function listen() {
   };
 }
 
-bot.dialog('/', (session) => {
-    if(session.message.text == "file")
-        return session.beginDialog('attachment_example:attachment');
-});
+bot.dialog('/', [
+  function(session) {
+      builder.Prompts.choice(
+              session,
+              'O que pretendes fazer?',
+              ['Obter informações'],
+              {
+                  maxRetries: 3,
+                  retryPrompt: 'Not a valid option',
+                  listStyle: 3
+              }
+      );
+  },
+  function (session, result) {
+    if (!result.response) {
+            // exhausted attemps and no selection, start over
+            session.send('Ooops! Too many attemps :( But don\'t worry, I\'m handling that exception and you can try again!');
+            return session.endDialog();
+    }
+
+    // on error, start over
+    session.on('error', function (err) {
+        session.send('Failed with message: %s', err.message);
+        session.endDialog();
+    });
+
+    // continue on proper dialog
+    var selection = result.response.entity;
+    switch (selection) {
+        case 'Obter informações':
+            return session.beginDialog('global_purpose');
+    }
+  } 
+]);
 
 
 // Enable Conversation Data persistence
@@ -25,6 +55,8 @@ bot.dialog('/', (session) => {
 
 // Sub-Dialogs
 bot.library(require('./dialogs/attachment_example').createLibrary());
+bot.dialog('foodMenu', require('./dialogs/foodMenu.js'));
+bot.dialog('global_purpose', require('./dialogs/global_purpose.js'));
 
 /*
 bot.library(require('./dialogs/...').createLibrary());
