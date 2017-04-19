@@ -15,7 +15,8 @@ function listen() {
 }
 
 bot.dialog('/', (session) => {
-  session.send('Hello World');
+    if(session.message.text == "file")
+        return session.beginDialog('attachment_example:attachment');
 });
 
 
@@ -23,6 +24,8 @@ bot.dialog('/', (session) => {
 // bot.set('persistConversationData', true);
 
 // Sub-Dialogs
+bot.library(require('./dialogs/attachment_example').createLibrary());
+
 /*
 bot.library(require('./dialogs/...').createLibrary());
 bot.library(require('./dialogs/...').createLibrary());
