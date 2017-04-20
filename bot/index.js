@@ -19,7 +19,7 @@ bot.dialog('/', [
       builder.Prompts.choice(
               session,
               'O que pretendes fazer?',
-              ['Obter suporte', 'Ajuda', 'Ementa', 'Análise Imagem', 'Tempo'],
+              ['Obter suporte', 'Ajuda', 'Ementa', 'Análise Imagem', 'Tempo', 'Faqs'],
               {
                   maxRetries: 3,
                   retryPrompt: 'Not a valid option',
@@ -58,6 +58,9 @@ bot.dialog('/', [
         case 'Tempo':
             return session.beginDialog('global_purpose:meteo');
             break;
+        case 'Faqs':
+            session => session.beginDialog('faqs:sonae-faqs');  // FIXME: used directly for testing purposes. May change as necessary.
+            break;
       default:
             return session.send("Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.");
             break;    
@@ -92,11 +95,11 @@ function sendMessage(message) {
     bot.send(message);
 }*/
 
+// import faqs dialogs
+bot.library(require('./dialogs/faqsDialog').createLibrary());
 
 module.exports = {
-  listen, /* ,
-    beginDialog: beginDialog,
-    sendMessage: sendMessage*/
+  listen,
 };
 
 //=========================================================

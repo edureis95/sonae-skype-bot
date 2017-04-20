@@ -1,6 +1,6 @@
 /**
- * Created by Miguel Botelho on 31/03/2017.
- * To run this module, one only needs to run 'npm test' on the command line.
+ * This file contains all the tests
+ * related to FAQs dialogs
  */
 
 // This loads the environment variables from the .env file
@@ -9,10 +9,53 @@ const assert = require('assert');
 const meteo = require('../services/meteo.js');
 const sharepoint = require("../services/sharepoint/sharepoint");
 const google_vision = require('../services/google_vision.js');
+const request = require('request-promise');
 
 /**
- * This is only a test example.
+ * SONAE FAQs Tests
  */
+
+const querySonaeFAQS = function (query, callback) {
+  const options = {
+    method: 'POST',
+    uri: `https://westus.api.cognitive.microsoft.com/qnamaker/v1.0//knowledgebases/${process.env.SONAE_FAQS_KBID}/generateAnswer`,
+    headers: {
+      'Ocp-Apim-Subscription-Key': process.env.SONAE_FAQS_SUBKEY,
+    },
+    body: { question: query },
+    json: true,
+  };
+
+  request(options)
+    .then((response) => {
+      callback(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+describe('FAQs', function () {
+  this.timeout(15000);
+  describe('SONAE FAQs', () => {
+    it('can query service', (done) => {
+      querySonaeFAQS('hi', (response) => {
+        assert.equal(response.answer, 'Hello');
+        done();
+      });
+    });
+    it('can avoid misleading answers', (done) => {
+      querySonaeFAQS('social', (response) => {
+        assert.equal(response.answer, 'Sede social ou capital social?');
+        done();
+      });
+    });
+    it('can obtain correct answers', (done) => {
+      querySonaeFAQS('capital social', (response) => {
+        assert.equal(response.answer, 'O capital social da Sonae totaliza 2.000 milh&#245;es de euros.');
+        done();
+      });
+
 describe('Array', function () {
     this.timeout(15000);
     describe('#indexOf()', function () {
@@ -75,6 +118,7 @@ describe('Tests the connection to OpenWeatherMap API', function () {
         });
     });
 });
+      
 /**
  * Test retrievel of food menu URL from sharepoint
  */
@@ -128,4 +172,3 @@ describe('Tests the connection to the Google Vision API', function () {
         });
     });
 });
-
