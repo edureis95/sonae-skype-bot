@@ -55,6 +55,9 @@ describe('FAQs', function () {
         assert.equal(response.answer, 'O capital social da Sonae totaliza 2.000 milh&#245;es de euros.');
         done();
       });
+    });
+  })
+});
 
 describe('Array', function () {
     this.timeout(15000);
