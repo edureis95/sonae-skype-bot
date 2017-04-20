@@ -1,12 +1,7 @@
-var builder = require('botbuilder');
+const builder = require('botbuilder');
 
 
-var lib = new builder.Library('productivity');
-
-// Export createLibrary() function
-module.exports.createLibrary = function () {
-    return lib.clone();
-};
+const lib = new builder.Library('productivity');
 
 module.exports = [
     function(session) {
@@ -43,3 +38,8 @@ module.exports = [
     }
 ];
 
+
+// Export createLibrary() function
+module.exports.createLibrary = function () {
+    return lib.clone();
+};

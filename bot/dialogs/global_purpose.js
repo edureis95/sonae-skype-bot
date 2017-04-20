@@ -6,47 +6,38 @@ const fs = require('fs');
 const request = require('request');
 var lib = new builder.Library('global_purpose');
 
-lib.dialog('analyze_image', function (session) {
+lib.dialog('analyze_image', [
 
-    var attachment = session.message.attachments[0];
+    function (session, args) {
+        if (args && args.reprompt) {
+            builder.Prompts.attachment(session, "O ficheiro que enviaste não é do tipo imagem. Tenta novamente.");
+        } else {
+            builder.Prompts.attachment(session, "Faz upload de uma imagem para eu analisar.");
+        }
+    },
 
-    var date = new Date();
-    var t = date.getTime();
+    function (session, results) {
 
-    const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);
+        if(hasImageAttachment(session)) {
+            var attachment = session.message.attachments[0];
 
-    //Save temp image file
-    download(attachment.contentUrl, fileName, function() {
-        google_vision.checkImage(fileName, function(caption) {
-            session.endDialog(caption);
-            //Delete temp image file
-            fs.unlink(fileName);
-        });
-    });
-});
+            var date = new Date();
+            var t = date.getTime();
 
-lib.dialog('food_menu', function(session) {
-    return session.endDialog('[Insert Menu here]');
-});
+            const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);
 
-//=========================================================
-// Utilities
-//=========================================================
-
-/**
- * Download file from url
- * @param {*} uri
- * @param {*} filename
- * @param {*} callback
- */
-var download = function(uri, filename, callback){
-    request.head(uri, function(err, res, body){
-        console.log('content-type:', res.headers['content-type']);
-        console.log('content-length:', res.headers['content-length']);
-
-        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
-    });
-};
+            //Save temp image file
+            download(attachment.contentUrl, fileName, function () {
+                google_vision.checkImage(fileName, function (caption) {
+                    session.endDialog(caption);
+                    //Delete temp image file
+                    fs.unlink(fileName);
+                });
+            });
+        } else {
+            session.replaceDialog('analyze_image', { reprompt: true });
+        }
+}]);
 
 lib.dialog('meteo/setLocation', [
     function (session) {
@@ -64,7 +55,6 @@ lib.dialog('meteo/setLocation', [
 
     }
 ]);
-
 
 lib.dialog('meteo', [
     function (session, args, next) {
@@ -171,6 +161,30 @@ lib.dialog('meteo', [
         }
     }
 ]);
+
+//=========================================================
+// Utilities
+//=========================================================
+
+/**
+ * Download file from url
+ * @param {*} uri
+ * @param {*} filename
+ * @param {*} callback
+ */
+var download = function (uri, filename, callback) {
+    request.head(uri, function (err, res, body) {
+        console.log('content-type:', res.headers['content-type']);
+        console.log('content-length:', res.headers['content-length']);
+
+        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+    });
+};
+
+function hasImageAttachment(session) {
+    return session.message.attachments.length > 0 &&
+        session.message.attachments[0].contentType.indexOf('image') !== -1;
+}
 
 // Export createLibrary() function
 module.exports.createLibrary = function () {

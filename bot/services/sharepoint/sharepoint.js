@@ -9,7 +9,7 @@ const sharepointRequest = require('sp-request');
  */
 function getFileFromSharePoint(filename, callback) {
   const partialEndpoint = 'https://sonaesystems.sharepoint.com/sites/sonaebot/_api/Files(';
-  const url = `${partialEndpoint + filename  })/$value`;
+  const url = `${partialEndpoint + filename})/$value`;
 
   const creds = {
     username: process.env.SONAE_USERNAME,
@@ -19,13 +19,13 @@ function getFileFromSharePoint(filename, callback) {
   const spRequest = sharepointRequest.create(creds);
 
   spRequest.get(url)
-        .then((response) => {
-            // console.log(response.body);
-          callback(response.body);
-        }).catch((err) => {
-          console.log('Error retrieving file from sharepoint. Check the filename');
-          callback(err);
-        });
+    .then((response) => {
+      // console.log(response.body);
+      callback(response.body);
+    }).catch((err) => {
+      console.log('Error retrieving file from sharepoint. Check the filename');
+      callback(err);
+    });
 }
 
 /**
@@ -34,7 +34,7 @@ function getFileFromSharePoint(filename, callback) {
  */
 function getFileUrlFromSharePoint(filename, callback) {
   const partialEndpoint = 'https://sonaesystems.sharepoint.com/sites/sonaebot/_api/Files(';
-  const url = `${partialEndpoint + filename  })`;
+  const url = `${partialEndpoint + filename})`;
 
   const creds = {
     username: process.env.SONAE_USERNAME,
@@ -43,19 +43,17 @@ function getFileUrlFromSharePoint(filename, callback) {
 
   const spRequest = sharepointRequest.create(creds);
 
-
-
   spRequest.get({
     url,
     json: true,
-  },
-    ).then((response) => {
-      console.log(response.body.d.Url);
-      callback(response.body.d.Url);
-    }).catch((err) => {
-      console.log('Error retrieving file from sharepoint. Check the filename');
-      callback(err);
-    });
+  }
+  ).then((response) => {
+    //console.log(response.body.d.Url);
+    callback(response.body.d.Url);
+  }).catch((err) => {
+    console.log('Error retrieving file from sharepoint. Check the filename');
+    callback(err);
+  });
 }
 
 
