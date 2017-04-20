@@ -1,23 +1,24 @@
 // This loads the environment variables from the .env file
 require('dotenv-extended').load();
 
-var express = require('express');
+const express = require('express');
 
 // Web app
-var app = express();
+const app = express();
 
 // Register your web app routes here
-/*app.get('/', function (req, res, next) {
+/* app.get('/', function (req, res, next) {
   res.render('index', { title: 'Sonae Bot' });
 }); */
 
 // Register Bot
-var bot = require('./bot');
+const bot = require('./bot');
+
 app.post('/api/messages', bot.listen());
 
 // Catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  var err = new Error('Not Found');
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -25,32 +26,32 @@ app.use(function (req, res, next) {
 
 // Error handlers
 
-//command line
-//NODE_ENV=[development | production | testing] node app.js
+// command line
+// NODE_ENV=[development | production | testing] node app.js
 
 // Development mode error handler, will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function (err, req, res, next) {
+  app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err
+      error: err,
     });
   });
 }
 
 // Production mode error handler, no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error: {},
   });
 });
 
 
 // Start listening
-var port = process.env.port || process.env.PORT || 3978;
-app.listen(port, function () {
+const port = process.env.port || process.env.PORT || 3978;
+app.listen(port, () => {
   console.log('Web Server listening on port %s', port);
 });

@@ -1,0 +1,21 @@
+TN:
+SF:C:\Users\Eduardo Reis\Documents\LGP\sonae-bot\bot\services\google_vision.js
+FN:11,checkImage
+FNF:1
+FNH:1
+FNDA:2,checkImage
+DA:1,1
+DA:11,1
+DA:12,2
+DA:14,2
+DA:16,2
+DA:17,2
+DA:20,0
+DA:24,1
+LF:8
+LH:7
+BRDA:16,1,0,2
+BRDA:16,1,1,0
+BRF:2
+BRH:1
+end_of_record
