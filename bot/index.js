@@ -19,7 +19,7 @@ bot.dialog('/', [
       builder.Prompts.choice(
               session,
               'O que pretendes fazer?',
-              ['Obter suporte'],
+              ['Obter suporte', 'Ajuda', 'Ementa', 'Análise Imagem'],
               {
                   maxRetries: 3,
                   retryPrompt: 'Not a valid option',
@@ -39,21 +39,38 @@ bot.dialog('/', [
         session.send('Failed with message: %s', err.message);
         session.endDialog();
     });
-
+    
     // continue on proper dialog
     var selection = result.response.entity;
     switch (selection) {
         case 'Obter suporte':
             return session.beginDialog('productivity');
+            break;
+      case 'Ajuda':
+            return session.beginDialog('other:help');
+            break;
+      case 'Ementa': 
+            return session.beginDialog('global_purpose:food_menu');
+            break;
+      case 'Análise Imagem':
+            return session.beginDialog('global_purpose:analyze_image'); 
+            break;
+      default:
+            return session.send("Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.");
+            break;    
     }
   } 
 ]);
-
 
 // Enable Conversation Data persistence
 // bot.set('persistConversationData', true);
 
 // Sub-Dialogs
+bot.library(require('./dialogs/global_purpose').createLibrary());
+bot.library(require('./dialogs/other').createLibrary());
+bot.library(require('./dialogs/productivity').createLibrary());
+//bot.library(require('./dialogs/...').createLibrary());    
+
 bot.library(require('./dialogs/attachment_example').createLibrary());
 bot.dialog('firstStepsManual', require('./dialogs/firstStepsManual.js'));
 bot.dialog('productivity', require('./dialogs/productivity.js'));
@@ -78,3 +95,11 @@ module.exports = {
     beginDialog: beginDialog,
     sendMessage: sendMessage*/
 };
+
+//=========================================================
+// Utilities
+//=========================================================
+function hasImageAttachment(session) {
+    return session.message.attachments.length > 0 &&
+        session.message.attachments[0].contentType.indexOf('image') !== -1;
+}
