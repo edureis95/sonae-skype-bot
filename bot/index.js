@@ -15,6 +15,7 @@ function listen() {
 }
 
 bot.dialog('/', function (session) {
+    session.userData.email = process.env.EMAIL;
      if(session.message.text == "meteorologia" || session.message.text == "tempo")
         return session.beginDialog('global_purpose:meteo');;
 });

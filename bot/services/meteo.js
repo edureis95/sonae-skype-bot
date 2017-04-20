@@ -52,7 +52,7 @@ function getWeatherByCityToday(city, country, next) {
                 wind_velocity: bodyParsed.wind.speed + ' metros/segundo',
                 temperature: toCelsius(bodyParsed.main.temp),
                 clouds: bodyParsed.clouds.all + '%',
-                country : bodyParsed.name,
+                country: bodyParsed.name,
             }
             next(respo);
         })
@@ -110,9 +110,9 @@ function getWeatherByCityOnDay(city, country, day, next) {
                     temperature: undefined,
                     clouds: undefined,
                 },
-                city : bodyParsed.city.name,
+                city: bodyParsed.city.name,
             }
-            
+
             // parses only the relevant information. it runs through a list and adds to the correct day, according to morning, afternoon and evening.
             // FIXME: the descriptions are in english
             for (let i = 0; i < bodyParsed.list.length; i++) {
