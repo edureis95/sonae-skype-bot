@@ -43,6 +43,7 @@ function getFileUrlFromSharePoint(filename, callback) {
 
   const spRequest = sharepointRequest.create(creds);
 
+
   spRequest.get({
     url,
     json: true,
