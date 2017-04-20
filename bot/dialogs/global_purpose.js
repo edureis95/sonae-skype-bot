@@ -8,45 +8,30 @@ var lib = new builder.Library('global_purpose');
 
 lib.dialog('analyze_image', function (session) {
 
-    var attachment = session.message.attachments[0];
+    builder.Prompts.text(session, "Insere uma imagem");
+    if (hasImageAttachment(session)) {
 
-    var date = new Date();
-    var t = date.getTime();
+        var attachment = session.message.attachments[0];
 
-    const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);
+        var date = new Date();
+        var t = date.getTime();
 
-    //Save temp image file
-    download(attachment.contentUrl, fileName, function() {
-        google_vision.checkImage(fileName, function(caption) {
-            session.endDialog(caption);
-            //Delete temp image file
-            fs.unlink(fileName);
+        const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);
+
+        //Save temp image file
+        download(attachment.contentUrl, fileName, function () {
+            google_vision.checkImage(fileName, function (caption) {
+                session.endDialog(caption);
+                //Delete temp image file
+                fs.unlink(fileName);
+            });
         });
-    });
+    }
 });
 
-lib.dialog('food_menu', function(session) {
+lib.dialog('food_menu', function (session) {
     return session.endDialog('[Insert Menu here]');
 });
-
-//=========================================================
-// Utilities
-//=========================================================
-
-/**
- * Download file from url
- * @param {*} uri
- * @param {*} filename
- * @param {*} callback
- */
-var download = function(uri, filename, callback){
-    request.head(uri, function(err, res, body){
-        console.log('content-type:', res.headers['content-type']);
-        console.log('content-length:', res.headers['content-length']);
-
-        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
-    });
-};
 
 lib.dialog('meteo/setLocation', [
     function (session) {
@@ -64,7 +49,6 @@ lib.dialog('meteo/setLocation', [
 
     }
 ]);
-
 
 lib.dialog('meteo', [
     function (session, args, next) {
@@ -171,6 +155,30 @@ lib.dialog('meteo', [
         }
     }
 ]);
+
+//=========================================================
+// Utilities
+//=========================================================
+
+/**
+ * Download file from url
+ * @param {*} uri
+ * @param {*} filename
+ * @param {*} callback
+ */
+var download = function (uri, filename, callback) {
+    request.head(uri, function (err, res, body) {
+        console.log('content-type:', res.headers['content-type']);
+        console.log('content-length:', res.headers['content-length']);
+
+        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+    });
+};
+
+function hasImageAttachment(session) {
+    return session.message.attachments.length > 0 &&
+        session.message.attachments[0].contentType.indexOf('image') !== -1;
+}
 
 // Export createLibrary() function
 module.exports.createLibrary = function () {
