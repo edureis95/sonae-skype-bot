@@ -1,31 +1,30 @@
 
 const sharepointRequest = require('sp-request');
-const spAuth = require('node-sp-auth');
-const request = require('request-promise');
+//  const spAuth = require('node-sp-auth');
+//  const request = require('request-promise');
 
 /**
  * Retrieves file from SharePoint
  * @param {string} filename must be between '' ex: var filename = "'ficheiro.xls'"
  */
 function getFileFromSharePoint(filename, callback) {
+  const partialEndpoint = 'https://sonaesystems.sharepoint.com/sites/sonaebot/_api/Files(';
+  const url = `${partialEndpoint + filename  })/$value`;
 
-    const partialEndpoint = "https://sonaesystems.sharepoint.com/sites/sonaebot/_api/Files("
-    const url = partialEndpoint + filename + ')/$value';
+  const creds = {
+    username: process.env.SONAE_USERNAME,
+    password: process.env.SONAE_PASSWORD,
+  };
 
-    let creds = {
-        username: process.env.SONAE_USERNAME,
-        password: process.env.SONAE_PASSWORD
-    }
+  const spRequest = sharepointRequest.create(creds);
 
-    var spRequest = sharepointRequest.create(creds);
-
-    spRequest.get(url)
-        .then(function (response) {
-            //console.log(response.body);
-            callback(response.body);
-        }).catch(function (err) {
-            console.log('Error retrieving file from sharepoint. Check the filename');
-            callback(err);
+  spRequest.get(url)
+        .then((response) => {
+            // console.log(response.body);
+          callback(response.body);
+        }).catch((err) => {
+          console.log('Error retrieving file from sharepoint. Check the filename');
+          callback(err);
         });
 }
 
@@ -34,27 +33,28 @@ function getFileFromSharePoint(filename, callback) {
  * @param {string} filename must be between '' ex: var filename = "'ficheiro.xls'"
  */
 function getFileUrlFromSharePoint(filename, callback) {
+  const partialEndpoint = 'https://sonaesystems.sharepoint.com/sites/sonaebot/_api/Files(';
+  const url = `${partialEndpoint + filename  })`;
 
-    const partialEndpoint = "https://sonaesystems.sharepoint.com/sites/sonaebot/_api/Files("
-    const url = partialEndpoint + filename + ')';
+  const creds = {
+    username: process.env.SONAE_USERNAME,
+    password: process.env.SONAE_PASSWORD,
+  };
 
-    let creds = {
-        username: process.env.SONAE_USERNAME,
-        password: process.env.SONAE_PASSWORD
-    }
+  const spRequest = sharepointRequest.create(creds);
 
-    var spRequest = sharepointRequest.create(creds);
 
-    spRequest.get({
-        url: url,
-        json: true
-    }
-    ).then(function (response) {
-        //console.log(response.body.d.Url);
-        callback(response.body.d.Url);
-    }).catch(function (err) {
-        console.log('Error retrieving file from sharepoint. Check the filename');
-        callback(err);
+
+  spRequest.get({
+    url,
+    json: true,
+  },
+    ).then((response) => {
+      console.log(response.body.d.Url);
+      callback(response.body.d.Url);
+    }).catch((err) => {
+      console.log('Error retrieving file from sharepoint. Check the filename');
+      callback(err);
     });
 }
 
@@ -83,4 +83,4 @@ function getAuth() {
         });
 } */
 
-module.exports = { /*getFileFromSharePoint,*/ getFileUrlFromSharePoint };
+module.exports = { /* getFileFromSharePoint,*/ getFileUrlFromSharePoint };

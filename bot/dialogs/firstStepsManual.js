@@ -18,7 +18,7 @@ module.exports = [
                 .addAttachment({
                     contentUrl: url,
                     contentType: contentType,
-                    name: 'Clica aqui para veres a ementa.'
+                    name: 'Clica aqui para veres o manual de primeiros passos na Sonae.'
                 });
 
             session.endDialog(msg);

@@ -4,8 +4,8 @@ module.exports = [
     function(session) {
         builder.Prompts.choice(
                 session,
-                'O que deseja saber?',
-                ['Ementa'],
+                'O que é que precisas?',
+                ['Saber o manual de primeiros passos da Sonae'],
                 {
                     maxRetries: 3,
                     retryPrompt: 'Not a valid option',
@@ -29,8 +29,8 @@ module.exports = [
         // continue on proper dialog
         var selection = result.response.entity;
         switch (selection) {
-            case 'Ementa':
-                return session.beginDialog('foodMenu');
+            case 'Saber o manual de primeiros passos da Sonae':
+                return session.beginDialog('firstStepsManual');
         }
     }
 ];
