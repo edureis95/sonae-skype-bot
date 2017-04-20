@@ -6,32 +6,38 @@ const fs = require('fs');
 const request = require('request');
 var lib = new builder.Library('global_purpose');
 
-lib.dialog('analyze_image', function (session) {
+lib.dialog('analyze_image', [
 
-    builder.Prompts.text(session, "Insere uma imagem");
-    if (hasImageAttachment(session)) {
+    function (session, args) {
+        if (args && args.reprompt) {
+            builder.Prompts.attachment(session, "O ficheiro que enviaste não é do tipo imagem. Tenta novamente.");
+        } else {
+            builder.Prompts.attachment(session, "Faz upload de uma imagem para eu analisar.");
+        }
+    },
 
-        var attachment = session.message.attachments[0];
+    function (session, results) {
 
-        var date = new Date();
-        var t = date.getTime();
+        if(hasImageAttachment(session)) {
+            var attachment = session.message.attachments[0];
 
-        const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);
+            var date = new Date();
+            var t = date.getTime();
 
-        //Save temp image file
-        download(attachment.contentUrl, fileName, function () {
-            google_vision.checkImage(fileName, function (caption) {
-                session.endDialog(caption);
-                //Delete temp image file
-                fs.unlink(fileName);
+            const fileName = 'uploads/temp' + t + '.' + attachment.contentType.substring(6);
+
+            //Save temp image file
+            download(attachment.contentUrl, fileName, function () {
+                google_vision.checkImage(fileName, function (caption) {
+                    session.endDialog(caption);
+                    //Delete temp image file
+                    fs.unlink(fileName);
+                });
             });
-        });
-    }
-});
-
-lib.dialog('food_menu', function (session) {
-    return session.endDialog('[Insert Menu here]');
-});
+        } else {
+            session.replaceDialog('analyze_image', { reprompt: true });
+        }
+}]);
 
 lib.dialog('meteo/setLocation', [
     function (session) {

@@ -16,6 +16,7 @@ function listen() {
 
 bot.dialog('/', [
   function(session) {
+      session.preferredLocale('pt');
       builder.Prompts.choice(
               session,
               'O que pretendes fazer?',
@@ -50,7 +51,7 @@ bot.dialog('/', [
             return session.beginDialog('other:help');
             break;
       case 'Ementa': 
-            return session.beginDialog('global_purpose:food_menu');
+            return session.beginDialog('foodMenu');
             break;
       case 'Análise Imagem':
             return session.beginDialog('global_purpose:analyze_image'); 
@@ -79,6 +80,7 @@ bot.library(require('./dialogs/productivity').createLibrary());
 
 bot.library(require('./dialogs/attachment_example').createLibrary());
 bot.dialog('firstStepsManual', require('./dialogs/firstStepsManual.js'));
+bot.dialog('foodMenu', require('./dialogs/foodMenu.js'));
 bot.dialog('productivity', require('./dialogs/productivity.js'));
 
 /*
