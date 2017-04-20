@@ -7,3 +7,4 @@ jspm_packages
 # coverage of tests
 coverage
 
+.vscode

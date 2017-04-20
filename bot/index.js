@@ -19,7 +19,7 @@ bot.dialog('/', [
       builder.Prompts.choice(
               session,
               'O que pretendes fazer?',
-              ['Obter suporte', 'Ajuda', 'Ementa', 'Análise Imagem'],
+              ['Obter suporte', 'Ajuda', 'Ementa', 'Análise Imagem', 'Tempo'],
               {
                   maxRetries: 3,
                   retryPrompt: 'Not a valid option',
@@ -54,6 +54,9 @@ bot.dialog('/', [
             break;
       case 'Análise Imagem':
             return session.beginDialog('global_purpose:analyze_image'); 
+            break;
+        case 'Tempo':
+            return session.beginDialog('global_purpose:meteo');
             break;
       default:
             return session.send("Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.");
