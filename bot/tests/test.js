@@ -21,12 +21,12 @@ describe('Array', function () {
 });
 
 /**
- * Test retrievel of first step manual URL from sharepoint
+ * Test retrievel of food menu URL from sharepoint
  */
-describe('Test first step manual', function () {
+describe('Test food menu', function () {
   this.timeout(15000);
-  it('should return first steps manual url', function (done) {
-      //todo alterar para o nome do ficheiro pretendido conforme
+  it('should return food menu url', function (done) {
+     //todo alterar para o nome do ficheiro pretendido conforme
       let filename = "'exemplo.pdf'";
       sharepoint.getFileUrlFromSharePoint(filename, function (url) {
           //todo alterar url
@@ -36,4 +36,21 @@ describe('Test first step manual', function () {
   });
 });
 
+
+/**
+ * Test retrievel of first step manual URL from sharepoint
+ */
+describe('Test first step manual', function () {
+  this.timeout(15000);
+  it('should return first steps manual url', function (done) {
+
+      //todo alterar para o nome do ficheiro pretendido conforme
+      let filename = "'exemplo.pdf'";
+      sharepoint.getFileUrlFromSharePoint(filename, function (url) {
+          //todo alterar url
+          assert.equal(url, 'https://sonaesystems.sharepoint.com/sites/SonaeBot/Shared Documents/exemplo.pdf');
+          done();
+      });
+  });
+});
 
