@@ -1,10 +1,13 @@
+# Modules
 node_modules
 jspm_packages
 
 # Optional npm cache directory
-.npm´
+.npm
+npm-debug\.log
 
-# coverage of tests
+# Coverage of tests
 coverage
 
+# Vs Code settings
 .vscode

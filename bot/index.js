@@ -62,6 +62,8 @@ bot.dialog('/', [
         case 'Faqs':
             session => session.beginDialog('faqs:sonae-faqs');  // FIXME: used directly for testing purposes. May change as necessary.
             break;
+        case 'Direções':
+            return return session.beginDialog('global_purpose:directions');
       default:
             return session.send("Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.");
             break;    
@@ -101,5 +103,7 @@ function sendMessage(message) {
 bot.library(require('./dialogs/faqsDialog').createLibrary());
 
 module.exports = {
-  listen,
+    listen: listen/*,
+    beginDialog: beginDialog,
+    sendMessage: sendMessage*/
 };

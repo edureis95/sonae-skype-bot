@@ -4,6 +4,8 @@ module.exports = {
         "import"
     ],
     "rules": {
+        "consistent-return": 0,
         "linebreak-style": 0,
+        "no-param-reassign": 0,
     }   
 }
