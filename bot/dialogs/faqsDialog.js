@@ -18,10 +18,19 @@ const recognizer = new cognitiveServices.QnAMakerRecognizer({
   subscriptionKey: process.env.SONAE_FAQS_SUBKEY,
 });
 
-lib.dialog('sonae-faqs', new cognitiveServices.QnAMakerDialog({
+lib.dialog('sonae-faqs', [
+  function (session) {
+    builder.Prompts.text(session, 'O que queres saber da SONAE?');
+  },
+  function (session, results) {
+    session.beginDialog('query-faqs');
+  }
+]);
+
+lib.dialog('query-faqs', new cognitiveServices.QnAMakerDialog({
   recognizers: [recognizer],
   defaultMessage: negativeResponse,
-  qnaThreshold: 0.3,
+  qnaThreshold: 0.5,
 }));
 
 // Export the dialogs
