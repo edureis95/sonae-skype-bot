@@ -1,5 +1,5 @@
 TN:
-SF:C:\Users\Eduardo Reis\Documents\LGP\sonae-bot\bot\services\meteo.js
+SF:D:\Faculdade\Ano 4\2 Semestre\Laboratório de Gestão de Projetos\sonae-bot\bot\services\meteo.js
 FN:10,toCelsius
 FN:19,timeConverter
 FN:38,getWeatherByCityToday
@@ -11,23 +11,23 @@ FN:165,(anonymous_8)
 FNF:8
 FNH:8
 FNDA:10,toCelsius
-FNDA:17,timeConverter
+FNDA:20,timeConverter
 FNDA:2,getWeatherByCityToday
 FNDA:1,(anonymous_4)
 FNDA:1,(anonymous_5)
 FNDA:2,getWeatherByCityOnDay
 FNDA:1,(anonymous_7)
-FNDA:2,(anonymous_8)
+FNDA:1,(anonymous_8)
 DA:1,1
 DA:3,1
 DA:10,1
 DA:11,10
 DA:19,1
-DA:20,17
-DA:21,17
-DA:22,17
-DA:23,17
-DA:27,17
+DA:20,20
+DA:21,20
+DA:22,20
+DA:23,20
+DA:27,20
 DA:38,1
 DA:39,2
 DA:41,1
@@ -45,8 +45,8 @@ DA:81,1
 DA:82,1
 DA:85,1
 DA:118,1
-DA:119,17
-DA:120,17
+DA:119,20
+DA:120,20
 DA:121,8
 DA:123,8
 DA:124,1
@@ -78,10 +78,10 @@ DA:153,1
 DA:154,1
 DA:155,1
 DA:156,1
-DA:159,9
+DA:159,12
 DA:160,1
 DA:163,1
-DA:166,2
+DA:166,1
 DA:170,1
 LF:65
 LH:63
@@ -90,7 +90,7 @@ BRDA:43,1,1,1
 BRDA:78,2,0,0
 BRDA:78,2,1,1
 BRDA:120,3,0,8
-BRDA:120,3,1,9
+BRDA:120,3,1,12
 BRDA:123,4,0,1
 BRDA:123,4,1,7
 BRDA:135,5,0,1
@@ -98,12 +98,12 @@ BRDA:135,5,1,6
 BRDA:147,6,0,1
 BRDA:147,6,1,5
 BRDA:159,7,0,1
-BRDA:159,7,1,8
+BRDA:159,7,1,11
 BRF:14
 BRH:12
 end_of_record
 TN:
-SF:C:\Users\Eduardo Reis\Documents\LGP\sonae-bot\bot\services\sharepoint\sharepoint.js
+SF:D:\Faculdade\Ano 4\2 Semestre\Laboratório de Gestão de Projetos\sonae-bot\bot\services\sharepoint\sharepoint.js
 FN:10,getFileFromSharePoint
 FN:35,getFileUrlFromSharePoint
 FNF:2
@@ -136,7 +136,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:C:\Users\Eduardo Reis\Documents\LGP\sonae-bot\bot\services\google_vision.js
+SF:D:\Faculdade\Ano 4\2 Semestre\Laboratório de Gestão de Projetos\sonae-bot\bot\services\googleVision.js
 FN:11,checkImage
 FNF:1
 FNH:1

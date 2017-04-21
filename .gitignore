@@ -11,3 +11,6 @@ coverage
 
 # Vs Code settings
 .vscode
+
+# IntellIJ files
+.idea

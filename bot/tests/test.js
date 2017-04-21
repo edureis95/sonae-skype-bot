@@ -8,7 +8,7 @@ require('dotenv-extended').load();
 const assert = require('assert');
 const meteo = require('../services/meteo.js');
 const sharepoint = require("../services/sharepoint/sharepoint");
-const google_vision = require('../services/google_vision.js');
+const google_vision = require('../services/googleVision.js');
 const request = require('request-promise');
 
 /**
@@ -103,7 +103,8 @@ describe('Tests the connection to OpenWeatherMap API', function () {
     this.timeout(15000);
     it('should return valencia', function (done) {
         meteo.getWeatherByCityOnDay('valencia', 'es', 2, function (weather) {
-            assert.equal(weather.country.toLowerCase(), 'valencia');
+            console.log(weather);
+            assert.equal(weather.city.toLowerCase(), 'valencia');
             done();
         });
     });
