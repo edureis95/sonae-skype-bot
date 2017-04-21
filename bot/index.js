@@ -60,7 +60,7 @@ bot.dialog('/', [
                 return session.beginDialog('global_purpose:meteo');
                 break;
             case 'Faqs':
-                session => session.beginDialog('faqs:sonae-faqs');  // FIXME: used directly for testing purposes. May change as necessary.
+                return session.beginDialog('faqs:sonae-faqs');
                 break;
             case 'Direções':
                 return session.beginDialog('global_purpose:directions');
@@ -84,22 +84,6 @@ bot.library(require('./dialogs/attachmentExample').createLibrary());
 bot.dialog('firstStepsManual', require('./dialogs/firstStepsManual.js'));
 bot.dialog('foodMenu', require('./dialogs/foodMenu.js'));
 bot.dialog('productivity', require('./dialogs/productivity.js'));
-
-/*
-bot.library(require('./dialogs/...').createLibrary());
-bot.library(require('./dialogs/...').createLibrary());
-*/
-
-/*
-function beginDialog(address, dialogId, dialogArgs) {
-    bot.beginDialog(address, dialogId, dialogArgs);
-}
-
-function sendMessage(message) {
-    bot.send(message);
-}*/
-
-// import faqs dialogs
 bot.library(require('./dialogs/faqsDialog').createLibrary());
 
 module.exports = {
