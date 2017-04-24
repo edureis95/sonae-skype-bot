@@ -1,3 +1,4 @@
+"use strict"; 
 const builder = require('botbuilder');
 const meteo = require('../services/meteo');
 const office = require('../services/Office365Connection.js');

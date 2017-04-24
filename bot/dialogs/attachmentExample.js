@@ -1,3 +1,4 @@
+"use strict";
 //modules
 const builder = require('botbuilder');
 const sharepoint = require("../services/sharepoint/sharepoint");
