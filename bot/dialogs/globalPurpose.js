@@ -189,6 +189,15 @@ lib.dialog('directions', [
   },
   function (session, results) {
     if (results.response.entity === 'Caminhar') {
+      const URL = 'http://dev.virtualearth.net/REST/v1/Imagery/Map/Road/Routes?' + 'wp.0=' + session.dialogData.directions.start_point + '&wp.1=' + session.dialogData.directions.end_point + '&key=' + process.env.BING_MAPS_API_KEY;
+      session.send('Aqui está a rota que encontrei entre ' + session.dialogData.directions.start_point + ' e ' + session.dialogData.directions.end_point + '.');
+      const message = new builder.Message(session)
+            .addAttachment({
+                contentUrl: URL,
+                contentType: 'image/jpg',
+                name: 'rota'
+            });
+      session.send(message);
       bing.maps.getWalkingRoute(session.dialogData.directions.start_point,
       session.dialogData.directions.end_point, (err, resp) => {
         if (err) {
@@ -220,9 +229,25 @@ lib.dialog('directions', [
                 name: 'rota'
             });
         session.send(message);
+      bing.maps.getDrivingRoute(session.dialogData.directions.start_point,
+      session.dialogData.directions.end_point, (err, resp) => {
+          if (err) {
+              return session.endDialogWithResult('Oops, não consigo encontrar o meu mapa. Importas-te de tentar outra vez?');
+            } else if (resp.resourceSets === undefined) {
+                session.send('Não consigo encontrar direcções para essa viagem... Tens a certeza que esses locais existem? Tenta outra vez!');
+                session.endDialogWithResult(results);
+            } else {
+                const route = resp.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
+                
+                for (let i = 0, length = route.length; i < length; i += 1) {
+                    const direction = (route[i].instruction.text);
+                    session.send(direction);
+                }
+          session.endDialogWithResult(results);
+        }
+    })
     }
-  },
-]);
+    }]);
 
 
 //=========================================================
