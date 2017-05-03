@@ -178,7 +178,7 @@ lib.dialog('meteo/setLocation', [
             session.dialogData.city = results.response;
             meteo.getWeatherByCityOnDay(results.response, '', 0, function (resp) {
                 session.dialogData.country = resp.split(/Retrieved: /)[1];
-                location = [session.dialogData.city, session.dialogData.country]
+                const location = [session.dialogData.city, session.dialogData.country]
                 session.endDialogWithResult(location);
             });
         }
@@ -286,7 +286,8 @@ lib.dialog('meteo', [
                 var msg = new builder.Message(session)
                     .textFormat(builder.TextFormat.xml)
                     .attachments(thumbnails);
-                session.endDialog(msg);
+                session.send(msg);
+                session.replaceDialog('start:startMessage', { reprompt:true });
             });
         }
     }
