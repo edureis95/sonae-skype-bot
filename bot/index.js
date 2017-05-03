@@ -1,8 +1,8 @@
 const builder = require('botbuilder');
 
 const connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD,
+    appId: process.env.MICROSOFT_APP_ID_,
+    appPassword: process.env.MICROSOFT_APP_PASSWORD_,
 });
 
 const bot = new builder.UniversalBot(connector);
@@ -15,10 +15,15 @@ function listen() {
 }
 
 bot.dialog('/', [
-    function(session) {
+    function(session, results) {
         session.beginDialog('start:startMessage');
     }
 ]);
+
+bot.dialog('/exit', function (session, args) {
+    session.send('Sempre ao dispor.');
+    session.replaceDialog('start:startMessage', { reprompt: true });
+});
 
 //Start Dialog
 bot.library(require('./dialogs/startMessage.js').createLibrary());
@@ -30,7 +35,16 @@ bot.library(require('./dialogs/other').createLibrary());
 bot.library(require('./dialogs/attachmentExample').createLibrary());
 bot.library(require('./dialogs/faqsDialog').createLibrary());
 
-bot.endConversationAction('sair', 'Sempre ao dispor.', { matches: /^sair/i });
+//bot.endConversationAction('sair', 'Sempre ao dispor.', { matches: /^sair/i });
+bot.beginDialogAction('restart', '/exit', { matches: /^sair/i });
+
+
+
+// STUFF I ADDED
+bot.dialog('/notify', function (session, args) {
+    // Deliver notification to the user.
+    session.endDialog(args.msgId, args.params);
+});
 
 module.exports = {
     listen: listen,
