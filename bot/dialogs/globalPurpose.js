@@ -324,10 +324,10 @@ lib.dialog('directions', [
           return session.endDialogWithResult('Oops, não consigo encontrar o meu mapa. Importas-te de tentar outra vez?');
         } else if (resp.resourceSets === undefined) {
           session.send('Não consigo encontrar direcções para essa viagem... Tens a certeza que esses locais existem? Tenta outra vez!');
-          session.endDialogWithResult(results);
+          session.replaceDialog('start:startMessage', { reprompt: true });
         } else if (resp.resourceSets[0].resources[0].travelDistance >= 15) {
           session.send('Não consigo encontrar direcções a caminhar para essa viagem... Talvez estejas a planear caminhar a mais? Tenta por carro!');
-          session.endDialogWithResult(results);
+          session.replaceDialog('start:startMessage', { reprompt: true });
         } else {
           const route = resp.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
 
@@ -335,7 +335,8 @@ lib.dialog('directions', [
             const direction = (route[i].instruction.text);
             session.send(direction);
           }
-          session.endDialogWithResult(results);
+          session.send(results);
+          session.replaceDialog('start:startMessage', { reprompt: true });
         }
       });
     }
@@ -346,7 +347,7 @@ lib.dialog('directions', [
           return session.endDialogWithResult('Oops, não consigo encontrar o meu mapa. Importas-te de tentar outra vez?');
         } else if (resp.resourceSets === undefined) {
           session.send('Não consigo encontrar direcções para essa viagem... Tens a certeza que esses locais existem? Tenta outra vez!');
-          session.endDialogWithResult(results);
+          session.replaceDialog('start:startMessage', { reprompt: true });
         } else {
           const route = resp.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
 
@@ -354,8 +355,7 @@ lib.dialog('directions', [
             const direction = (route[i].instruction.text);
             session.send(direction);
           }
-
-          session.endDialogWithResult(results);
+          session.replaceDialog('start:startMessage', { reprompt: true });
         }
       });
     }
