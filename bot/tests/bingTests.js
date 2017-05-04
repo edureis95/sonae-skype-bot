@@ -38,7 +38,7 @@ describe('BING API', function () {
       const jsonResponse = JSON.parse(response);
       assert.equal(
         jsonResponse.resourceSets[0].resources[0].routeLegs[0].actualEnd.coordinates[0],
-        41.21012,
+        41.21012
       );
       done();
     });

@@ -1,3 +1,4 @@
+"use strict";
 const request = require('request-promise');
 
 const appId = '612180c7acafaf536644f77c8b57f2ec';
