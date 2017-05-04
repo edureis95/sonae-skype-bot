@@ -315,7 +315,19 @@ lib.dialog('directions', [
     if (results.response) {
       session.dialogData.directions.end_point = results.response;
     }
-    builder.Prompts.choice(session, 'Qual é o modo de transporte a utilizar na viagem?', ['Caminhar', 'Carro'], { listStyle: builder.ListStyle.button });
+    const URL = 'http://dev.virtualearth.net/REST/v1/Imagery/Map/Road/Routes?wp.0=' + session.dialogData.directions.start_point + '&wp.1=' + session.dialogData.directions.end_point + '&key=' + process.env.BING_MAPS_API_KEY;
+    session.send('Aqui está a rota que encontrei entre ' + session.dialogData.directions.start_point + ' e ' + session.dialogData.directions.end_point);
+    const message = new builder.Message(session)
+        .addAttachment({
+          contentUrl: URL,
+          contentType: 'image/jpg',
+          name: 'rota',
+        });
+    session.send(message);
+    builder.Prompts.choice(session, 'Quer as direções para esta rota?', ['Sim', 'Não'], { listStyle: builder.ListStyle.button });
+  },
+  function (session, results) {
+    if (results.response.entity === 'Sim') { builder.Prompts.choice(session, 'Qual é o modo de transporte a utilizar na viagem?', ['Caminhar', 'Carro'], { listStyle: builder.ListStyle.button }); } else { session.endDialogWithResult(results); }
   },
   function (session, results) {
     if (results.response.entity === 'Caminhar') {
@@ -360,8 +372,7 @@ lib.dialog('directions', [
         }
       });
     }
-  },
-]);
+  }]);
 
 
 //=========================================================
