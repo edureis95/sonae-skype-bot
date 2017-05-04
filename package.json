@@ -19,9 +19,9 @@
   },
   "homepage": "https://github.com/LGP-FEUP/sonae-bot#readme",
   "dependencies": {
-    "bing": "^0.1.0",
     "@google-cloud/vision": "^0.11.0",
     "adal-node": "^0.1.22",
+    "bing": "https://github.com/nuno-silva18/bing/tarball/master",
     "botbuilder": "^3.7.0",
     "botbuilder-cognitiveservices": "^1.0.1",
     "cognitive-services": "^0.1.1",
