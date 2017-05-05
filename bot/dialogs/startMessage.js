@@ -1,4 +1,5 @@
-var builder = require('botbuilder');
+const builder = require('botbuilder');
+
 const lib = new builder.Library('start');
 
 lib.dialog('startMessage', [
@@ -31,31 +32,23 @@ lib.dialog('startMessage', [
     function (session, result) {
         if (!result.response) {
             // exhausted attemps and no selection, start over
-            switch(session.message.text.toLowerCase())
-            {
+            switch (session.message.text.toLowerCase()) {
                 case 'ajuda':
                     return session.beginDialog('other:help');
-                    break;
                 case 'manual primeiros passos':
                     return session.beginDialog('global_purpose:firstStepsManual');
-                    break;
                 case 'ementa':
                     return session.beginDialog('global_purpose:foodMenu');
-                    break;
                 case 'análise imagem':
                     return session.beginDialog('global_purpose:analyze_image');
-                    break;
                 case 'tempo':
                     return session.beginDialog('global_purpose:meteo');
-                    break;
                 case 'faqs':
                     return session.beginDialog('faqs:sonae-faqs');
-                    break;
                 case 'direções':
                     return session.beginDialog('global_purpose:directions');
                 default:
-                    return session.send("Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.");
-                    break; 
+                    return session.send('Não percebi. Tenta escrever \'Ajuda\' para saberes como te posso ajudar.');
             }
             return session.endDialog();
         }
@@ -67,10 +60,11 @@ lib.dialog('startMessage', [
         });
 
         // continue on proper dialog
-        var selection = result.response.entity;
+        const selection = result.response.entity;
         switch (selection) {
             case 'Obter Informações':
                 return session.beginDialog('global_purpose:options');
+            default:
                 break;
         }
     }

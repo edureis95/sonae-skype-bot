@@ -1,13 +1,13 @@
-var builder = require('botbuilder');
+const builder = require('botbuilder');
 
-var lib = new builder.Library('other');
+const lib = new builder.Library('other');
 
-var HelpMessage = '\n Posso ajudar-te nas seguintes áreas:\n * Reuniões\n * Produtividade\n * Suporte\n * Dicas e Atalhos\n * Propósitos Gerais';
-var UserNameKey = 'UserName';
-var UserWelcomedKey = 'UserWelcomed';
+const HelpMessage = '\n Posso ajudar-te nas seguintes áreas:\n * Reuniões\n * Produtividade\n * Suporte\n * Dicas e Atalhos\n * Propósitos Gerais';
+const UserNameKey = 'UserName';
+const UserWelcomedKey = 'UserWelcomed';
 
 // Greet dialog
-lib.dialog('greet', new builder.SimpleDialog(function (session, results) {
+lib.dialog('greet', new builder.SimpleDialog((session, results) => {
     if (results && results.response) {
         session.userData[UserNameKey] = results.response;
         session.privateConversationData[UserWelcomedKey] = true;
@@ -19,10 +19,8 @@ lib.dialog('greet', new builder.SimpleDialog(function (session, results) {
 }));
 
 // Help dialog
-lib.dialog('help', function (session) {
-    
+lib.dialog('help', (session) => {
     return session.endDialog(HelpMessage);
-
 });
 
 

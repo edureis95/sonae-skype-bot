@@ -46,9 +46,8 @@ function getFileUrlFromSharePoint(filename, callback) {
   spRequest.get({
     url,
     json: true,
-  }
-  ).then((response) => {
-    //console.log(response.body.d.Url);
+  }).then((response) => {
+    //  console.log(response.body.d.Url);
     callback(response.body.d.Url);
   }).catch((err) => {
     console.log('Error retrieving file from sharepoint. Check the filename');
@@ -81,4 +80,5 @@ function getAuth() {
         });
 } */
 
-module.exports = { /* getFileFromSharePoint,*/ getFileUrlFromSharePoint };
+module.exports = { /* getFileFromSharePoint,*/ getFileUrlFromSharePoint }
+;
