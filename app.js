@@ -6,10 +6,26 @@ const express = require('express');
 // Web app
 const app = express();
 
+// Register your web app routes here
+/* app.get('/', function (req, res, next) {
+  res.render('index', { title: 'Sonae Bot' });
+}); */
+
 // Register Bot
 const bot = require('./bot');
 
 app.post('/api/messages', bot.listen());
+
+app.post('/api/notify', function (req, res) {
+  // Process posted notification
+  var address = JSON.parse(req.body.address);
+  var notification = req.body.notification;
+  var params = req.body.params;
+  // Send notification as a proactive message
+  bot.beginDialog(address, '/notify', { msgId: notification, params: params });
+  res.status(200);
+  res.end();
+});
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {

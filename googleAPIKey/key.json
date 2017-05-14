@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "persuasive-yeti-163120",
+  "private_key_id": "a204885fda94de9223166469033a525872ce6091",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDHC0oSte//Iai2\nUOyAT2gXG9c4dFf8ipRaVpwWRhUvYPr65znJQd8cF0js5qxBKFGsRjtrq5a5NBXn\nexojHL8pr2Ixcn0lymvCeyJn6uXruocFU1IlUFoAim1O9J1L3HrGG5xj/cGjrC9n\nHDOCxmOj/pPl1zt8wAxEeQDXXiW8lvS9J1rUG8SqFH0C/C3tIWGmCFowjNxO685d\nNf6b65tHiW4gAgEkfBrLpWEi9JLNmdnSgVe9xBS8eK5pUpCyREuDCFpk4NL3GKXE\nCx05tcbvX++D8naX2NQ9zsS8TileIqg+KkpgnMxxVqVPiJu2lFgg37koIu+SyQUn\nyXfiNQ93AgMBAAECggEAX1zaTWKbrInM0iStWsAwp7mwAJ1FNnqSn0GVoNpM9hkp\nxiIYPoNvyH6jctUFvGX702UGvQxFt0/sGq6RFDeGowsjKXun1/5GaLQkBNO2+pyw\nae3EkpoPtOidfFGYNytYKyg5YnLGXot1XppVV5eDT6P96gWXu6ordnbe31B9FgAI\nmxTafM4+t7buQnuaEso8xQ/zpHKY2DrrLcYwZV94LT+qnuNbkwdujha3qlRmr31d\njDoRZlSTBdh/leQszbrtxCVdj10W1BeLNMYgC9pHvjnXDrde+RQ5V1Wv6/2KNCUm\nag3Qp4529r+CepmJUyDZuPgIUIKj8o4Us1ha43fiMQKBgQDrqwMXzwwMDNG3bnuI\norIpF/jXbTjGz6miHU3jf6haCcYW1VLeLSf3K3u37VBlJQhqF3KeNn4kue4AH9ct\n9Uey5Y4nENQCRlSOiQ3AVTKbcJVnXC4L99bpQWo4u9RU8LbWAm8lDT+dDLrR3Vq7\nJC82tAGntqDXeYDwDAeZOQzFmQKBgQDYN2XO7AqpdT1wmtawcOgR9KESKkJ8tXyi\ntXraRaxs+hfoAVSkKmIskLwcA2jMjCdv9lmllzy60tulX1vX/0xaqK/TdTpdeilV\nde0KsWfq1CZNFu10JwFeRDzlaWL1bPpfwwOUnvV08hHZSGLbW0lg6C97oiiDEwck\nBnHP9DeHjwKBgQDTzTpWZ4qYOd0xUmZMAozESfsnAc6JP5FhVZzu3Yhcg3Q4iTiU\n3ViR1861Gt+qR4Isdy5X6vmr4D56diNZ9puduJntmj4wXS0ZfSuSs/9rm99qqXno\n37GSqWvh2U2XmU95P27Mif+mEg7FFn+4uWiFbXofVQ9xGI49L1KU7qT/4QKBgQC+\n/AgIxAUS9EVmDs9uoPzMx3nzUrLR93l1O7qdzQdmZ27wdyRtsiZv2RTf5b8PVwmK\n418CXtm86H4t0FKPM6odNn3A2f7JDRwvqe/NDzGMgwKl+4eZns6dlsb3maRYx39N\nUTP7doG4YA6WEFOKEVN6rv0qRu1kAk2/a5Xiq4TVTwKBgQCh1CX96zVuXYxfH8++\nSLrbp3Lwf7/dW77481qPLuZFEPcy4o2gqZSnb0N9LKB8iRMkGZk6iqBmLc+wfRlT\n52KOO1cIvbuoW+HBoqgf8Mk3lfPutc8lmk3mPyzUDXELZlZK8eNJ4mlYzT298Qgj\nMcmX3aEfED5uyOFAJ290kn0HkQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "teste-account@persuasive-yeti-163120.iam.gserviceaccount.com",
+  "client_id": "103426868538201523677",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/teste-account%40persuasive-yeti-163120.iam.gserviceaccount.com"
+}

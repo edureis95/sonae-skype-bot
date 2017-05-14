@@ -7,5 +7,6 @@ module.exports = {
         "consistent-return": 0,
         "linebreak-style": 0,
         "no-param-reassign": 0,
+        "indent":0,
     }   
 }

@@ -1,6 +1,16 @@
+# Modules
 node_modules
 jspm_packages
 
 # Optional npm cache directory
 .npm
 npm-debug\.log
+
+# Coverage of tests
+coverage
+
+# Vs Code settings
+.vscode
+
+# IntellIJ files
+.idea
